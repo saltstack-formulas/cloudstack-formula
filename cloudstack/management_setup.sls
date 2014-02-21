@@ -8,7 +8,7 @@ include:
   - cloudstack.setup
   - mysql.server
   - ntp
-  - openjdk
+  - java.server_jre
   - tomcat
 
 extend:
