@@ -12,6 +12,7 @@ cloudstack_management:
     - require:
       - pkgrepo: cloudstack_repo
   service:
+    - running
     - name: {{ cloudstack.management_srv }}
     - enable: True
     - require:
