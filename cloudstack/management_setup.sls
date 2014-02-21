@@ -5,8 +5,6 @@
 include:
   - cloudstack.management
   - mysql.server
-  - cloudstack.setup
-  - mysql.server
   - ntp
   - java.server_jre
   - tomcat
