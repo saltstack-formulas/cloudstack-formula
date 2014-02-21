@@ -1,0 +1,18 @@
+{% set lookup_table = {
+    'Debian': {
+        'agent_pkg': 'cloudstack-agent',
+        'management_pkg': 'cloudstack-management',
+        'management_srv': 'cloudstack-management',
+
+        'common_dir': '/usr/share/cloudstack-common',
+
+        'repo_url': 'deb http://cloudstack.apt-get.eu/ubuntu precise 4.1',
+        'repo_pubkey': 'http://cloudstack.apt-get.eu/release.asc',
+        'repo_keyserver': 'keyserver.ubuntu.com',
+    },
+    'RedHat': {
+    },
+} %}
+
+{% set cloudstack = salt['grains.filter_by'](lookup_table,
+    merge=salt['pillar.get']('cloudstack:lookup')) %}
