@@ -19,12 +19,12 @@ cloudstack_setup_databases:
     - watch
     - name: |
         cloudstack-setup-databases \
-            cloud:<dbpassword>@localhost \
-            --deploy-as=root:<password> \
-            -e <encryption_type> \
-            -m <management_server_key> \
-            -k <database_key> \
-            -i <management_server_ip>
+            cloud:{{ salt['pillar.get']('cloudstack.management.db_user') }}@localhost \
+            --deploy-as=root:{{ salt['pillar.get']('cloudstack.management.db_pass') }} \
+            -e {{ salt['pillar.get']('cloudstack.management.encryption_type') }} \
+            -m {{ salt['pillar.get']('cloudstack.management.server_key') }} \
+            -k {{ salt['pillar.get']('cloudstack.management.database_key') }} \
+            -i {{ salt['pillar.get']('cloudstack.management.server_ip') }}
         cloudstack-setup-management
     - require:
       - pkg: mysql_server

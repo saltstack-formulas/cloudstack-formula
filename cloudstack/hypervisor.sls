@@ -10,9 +10,9 @@ include:
 cloudstack_hypervisor_nfs:
   mount:
     - mounted
-    - name: /mnt/export/secondary
-    - device: 192.168.38.100:/export/secondary
-    - fstype: nfs
+    - name: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_point', '/mnt/export/secondary') }}
+    - device: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_device', '192.168.38.100:/export/secondary') }}
+    - fstype: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_fstype', 'nfs') }}
     - mkmnt: True
 
 cloudstack_agent:

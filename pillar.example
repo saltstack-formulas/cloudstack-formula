@@ -1,0 +1,47 @@
+# Add a top-level dictionary to Pillar named 'cloudstack' to parameterize the
+# CloudStack formulas. Available parameters and the default values for each are
+# below.
+
+cloudstack:
+  # Override values in map.jinja.
+  lookup:
+    agent_pkg: cloudstack-agent
+    management_pkg: cloudstack-management
+    management_srv: cloudstack-management
+
+    exports_file: /etc/exports
+    common_dir: /usr/share/cloudstack-common
+
+    repo_url: deb http://cloudstack.apt-get.eu/ubuntu precise 4.1
+    repo_pubkey: http://cloudstack.apt-get.eu/release.asc
+    repo_keyserver: keyserver.ubuntu.com
+
+  management:
+    # Configure the CloudStack mangement server. Note these params do not have
+    # default values and must be configured in Pillar.
+    db_user: <username>
+    db_pass: <password>
+
+    encryption_type: <type>
+    database_key: <database_key>
+    server_key: <management_server_key>
+    server_ip: <management_server_ip>
+
+  nfs:
+    # Locations for setting up the shared storage for VM images that the
+    # hypervisors will be pulling from.
+    mount_dir: /export/secondary
+    mount_user: nobody
+    mount_group: nogroup
+    mount_mode: 755
+
+    exports_file: '/export/secondary 192.168.38.*(rw,async,no_root_squash,no_subtree_check)'
+    export_cmd: exportfs -a
+
+    vm_template_archive: http://download.cloud.com/templates/acton/acton-systemvm-02062012.qcow2.bz2
+
+  storage:
+    # Params for mounting the secondary storage on the hypervisors.
+    secondary_mount_point: /mnt/export/secondary
+    secondary_mount_device: 192.168.38.100:/export/secondary
+    secondary_mount_fstype: nfs
