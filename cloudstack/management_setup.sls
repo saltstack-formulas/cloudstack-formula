@@ -1,5 +1,7 @@
 # Configure a new CloudStack management server
 
+{% from "cloudstack/map.jinja" import cloudstack with context %}
+
 include:
   - cloudstack.management
   - mysql.server

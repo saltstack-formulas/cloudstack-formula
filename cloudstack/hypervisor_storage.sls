@@ -1,6 +1,8 @@
 # Configure and seed an NFS store for the hypervisors
 # Requires 5 GB of free space
 
+{% from "cloudstack/map.jinja" import cloudstack with context %}
+
 include:
   - nfs.server
 
