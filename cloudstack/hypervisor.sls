@@ -4,7 +4,7 @@
 
 include:
   - cloudstack.repository
-  - cloudstack.storage
+  - cloudstack.hypervisor_storage
   - libvirt
 
 cloudstack_hypervisor_nfs:
