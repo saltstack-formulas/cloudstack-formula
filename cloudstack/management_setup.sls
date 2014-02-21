@@ -11,6 +11,8 @@ include:
 
 extend:
   cloudstack_management:
+    # Since we're setting up for the first time, make sure the newly added
+    # package repo has been fetched.
     pkg:
       - refresh: True
 
