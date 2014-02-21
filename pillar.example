@@ -19,6 +19,10 @@ cloudstack:
   management:
     # Configure the CloudStack mangement server. Note these params do not have
     # default values and must be configured in Pillar.
+    conn_user: <username>
+    conn_pass: <password>
+
+    db_name: <database name>
     db_user: <username>
     db_pass: <password>
 
