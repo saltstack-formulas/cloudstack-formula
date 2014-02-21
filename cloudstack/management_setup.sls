@@ -19,16 +19,16 @@ extend:
 cloudstack_dbname:
   mysql_database:
     - present
-    - name: {{ salt['pillar.get']('cloudstack.management.db_name') }}
+    - name: {{ salt['pillar.get']('cloudstack:management:db_name') }}
 
 cloudstack_dbuser:
   mysql_user:
     - present
-    - name:  {{ salt['pillar.get']('cloudstack.management.db_name') }}
+    - name:  {{ salt['pillar.get']('cloudstack:management:db_name') }}
     - host: localhost
-    - password: {{ salt['pillar.get']('cloudstack.management.db_pass') }}
-    - connection_user: {{ salt['pillar.get']('cloudstack.management.conn_user') }}
-    - connection_pass: {{ salt['pillar.get']('cloudstack.management.conn_pass') }}
+    - password: {{ salt['pillar.get']('cloudstack:management:db_pass') }}
+    - connection_user: {{ salt['pillar.get']('cloudstack:management:conn_user') }}
+    - connection_pass: {{ salt['pillar.get']('cloudstack:management:conn_pass') }}
     - connection_charset: utf8
 
 cloudstack_dbperms:
@@ -36,8 +36,8 @@ cloudstack_dbperms:
     - present
     - name: cloudstack_dbperms
     - grant: select,insert,update
-    - database: {{ salt['pillar.get']('cloudstack.management.db_name') }}.*
-    - user: {{ salt['pillar.get']('cloudstack.management.db_user') }}
+    - database: {{ salt['pillar.get']('cloudstack:management:db_name') }}.*
+    - user: {{ salt['pillar.get']('cloudstack:management:db_user') }}
     - host: localhost
 
 cloudstack_setup_databases:
@@ -46,11 +46,11 @@ cloudstack_setup_databases:
     - name: |
         cloudstack-setup-databases \
             cloud:{{ salt['pillar.get']('cloudstack.management.db_user') }}@localhost \
-            --deploy-as=root:{{ salt['pillar.get']('cloudstack.management.db_pass') }} \
-            -e {{ salt['pillar.get']('cloudstack.management.encryption_type') }} \
-            -m {{ salt['pillar.get']('cloudstack.management.server_key') }} \
-            -k {{ salt['pillar.get']('cloudstack.management.database_key') }} \
-            -i {{ salt['pillar.get']('cloudstack.management.server_ip') }}
+            --deploy-as=root:{{ salt['pillar.get']('cloudstack:management:db_pass') }} \
+            -e {{ salt['pillar.get']('cloudstack:management:encryption_type') }} \
+            -m {{ salt['pillar.get']('cloudstack:management:server_key') }} \
+            -k {{ salt['pillar.get']('cloudstack:management:database_key') }} \
+            -i {{ salt['pillar.get']('cloudstack:management:server_ip') }}
         cloudstack-setup-management
     - require:
       - pkg: mysql_server
