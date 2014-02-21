@@ -7,11 +7,26 @@
         'exports_file': '/etc/exports',
         'common_dir': '/usr/share/cloudstack-common',
 
-        'repo_url': 'deb http://cloudstack.apt-get.eu/ubuntu precise 4.1',
-        'repo_pubkey': 'http://cloudstack.apt-get.eu/release.asc',
-        'repo_keyserver': 'keyserver.ubuntu.com',
+        'repo_settings': [
+            {'name': 'deb http://cloudstack.apt-get.eu/ubuntu precise 4.1'},
+            {'keyserver': 'http://cloudstack.apt-get.eu/release.asc'},
+            {'key_url': 'keyserver.ubuntu.com'},
+        ],
     },
     'RedHat': {
+        'agent_pkg': 'cloudstack-agent',
+        'management_pkg': 'cloudstack-management',
+        'management_srv': 'cloudstack-management',
+
+        'exports_file': '/etc/exports',
+        'common_dir': '/usr/share/cloudstack-common',
+
+        'repo_settings': [
+            {'baseurl': 'http://cloudstack.apt-get.eu/rhel/4.2/'},
+            {'humanname': 'CloudStack'},
+            {'enabled': '1'},
+            {'gpgcheck': '0'},
+        ],
     },
 } %}
 
