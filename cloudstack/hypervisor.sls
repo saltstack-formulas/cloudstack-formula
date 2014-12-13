@@ -8,23 +8,20 @@ include:
   - libvirt
 
 cloudstack_hypervisor_nfs:
-  mount:
-    - mounted
+  mount.mounted:
     - name: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_point', '/mnt/export/secondary') }}
     - device: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_device', '192.168.38.100:/export/secondary') }}
     - fstype: {{ salt['pillar.get']('cloudstack:storage:secondary_mount_fstype', 'nfs') }}
     - mkmnt: True
 
 cloudstack_agent:
-  pkg:
-    - installed
+  pkg.installed:
     - name: {{ cloudstack.agent_pkg }}
     - require:
       - pkgrepo: cloudstack_repo
 
 cloudstack_libvirt_conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/libvirt/libvirt.conf
     - contents: |
         listen_tls = 0
@@ -36,8 +33,7 @@ cloudstack_libvirt_conf:
       - service: libvirt
 
 cloudstack_libvirt_qemu_conf:
-  file:
-    - managed
+  file.managed:
     - name: /etc/libvirt/qemu.conf
     - contents: |
         vnc_listen=0.0.0.0
@@ -45,8 +41,7 @@ cloudstack_libvirt_qemu_conf:
       - service: libvirt
 
 cloudstack_libvirt_init_conf:
-  file:
-    - append
+  file.append:
     - name: /etc/init/libvirt-bin.conf
     - text: |
         env libvirtd_opts="-d -l"

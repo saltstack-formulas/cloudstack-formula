@@ -6,13 +6,11 @@ include:
   - cloudstack.repository
 
 cloudstack_management:
-  pkg:
-    - installed
+  pkg.installed:
     - name: {{ cloudstack.management_pkg }}
     - require:
       - pkgrepo: cloudstack_repo
-  service:
-    - running
+  service.running:
     - name: {{ cloudstack.management_srv }}
     - enable: True
     - require:
