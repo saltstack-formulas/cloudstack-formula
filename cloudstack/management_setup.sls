@@ -17,13 +17,11 @@ extend:
       - refresh: True
 
 cloudstack_dbname:
-  mysql_database:
-    - present
+  mysql_database.present:
     - name: {{ salt['pillar.get']('cloudstack:management:db_name') }}
 
 cloudstack_dbuser:
-  mysql_user:
-    - present
+  mysql_user.present:
     - name:  {{ salt['pillar.get']('cloudstack:management:db_name') }}
     - host: localhost
     - password: {{ salt['pillar.get']('cloudstack:management:db_pass') }}
@@ -32,8 +30,7 @@ cloudstack_dbuser:
     - connection_charset: utf8
 
 cloudstack_dbperms:
-  mysql_grants:
-    - present
+  mysql_grants.present:
     - name: cloudstack_dbperms
     - grant: select,insert,update
     - database: {{ salt['pillar.get']('cloudstack:management:db_name') }}.*
@@ -41,8 +38,7 @@ cloudstack_dbperms:
     - host: localhost
 
 cloudstack_setup_databases:
-  cmd:
-    - watch
+  cmd.watch:
     - name: |
         cloudstack-setup-databases \
             cloud:{{ salt['pillar.get']('cloudstack.management.db_user') }}@localhost \
